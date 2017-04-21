@@ -15,7 +15,7 @@ defmodule Rank.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger],
+    [extra_applications: [:logger, :tentacat],
      mod: {Rank.Application, []}]
   end
 
@@ -29,6 +29,8 @@ defmodule Rank.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:tentacat, "~> 0.5", github: "denispeplin/tentacat"}
+    ]
   end
 end
