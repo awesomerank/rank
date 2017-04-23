@@ -3,6 +3,8 @@ defmodule Rank.Parsers.Meta do
   Parser for list of awesome lists
   """
 
+  alias Rank.Github
+
   @owner "sindresorhus"
   @repo "awesome"
 
@@ -10,10 +12,7 @@ defmodule Rank.Parsers.Meta do
   Parse Awesome Meta
   """
   def parse do
-    Tentacat.Contents.readme(@owner, @repo)
-    |> Map.get("content")
-    |> :base64.decode
-    |> String.split("\n")
+    Github.get_readme(@owner, @repo)
     |> Rank.Parsers.Page.parse
   end
 end

@@ -8,7 +8,6 @@ defmodule Rank.Parsers.Page do
   """
   def parse([line | tail], state \\ nil, categories \\ []) do
     {state, result} = parse_line(state, line)
-    |> IO.inspect
     cond do
       is_nil(result) ->
         parse(tail, state, categories)
