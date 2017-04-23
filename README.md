@@ -1,6 +1,14 @@
 # Rank
 
-**TODO: Add description**
+## Data to handle
+
+Hierarcy:
+- Meta
+  - MetaCategory
+    - List (github only)
+      - Category
+        - Link (mostly github)
+          - SubLink (as above but one level deeper)
 
 ## Installation
 
@@ -16,4 +24,3 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/rank](https://hexdocs.pm/rank).
-

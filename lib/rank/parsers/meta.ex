@@ -6,9 +6,14 @@ defmodule Rank.Parsers.Meta do
   @owner "sindresorhus"
   @repo "awesome"
 
+  @doc """
+  Parse Awesome Meta
+  """
   def parse do
     Tentacat.Contents.readme(@owner, @repo)
     |> Map.get("content")
     |> :base64.decode
+    |> String.split("\n")
+    |> Rank.Parsers.Page.parse
   end
 end

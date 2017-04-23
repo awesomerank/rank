@@ -7,4 +7,4 @@
   "metrics": {:hex, :metrics, "1.0.1", "25f094dea2cda98213cecc3aeff09e940299d950904393b2a29d191c346a8486", [:rebar3], []},
   "mimerl": {:hex, :mimerl, "1.0.2", "993f9b0e084083405ed8252b99460c4f0563e41729ab42d9074fd5e52439be88", [:rebar3], []},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.1", "28a4d65b7f59893bc2c7de786dec1e1555bd742d336043fe644ae956c3497fbe", [:make, :rebar], []},
-  "tentacat": {:git, "https://github.com/denispeplin/tentacat.git", "16e5f5d93187890fe0670c3d68a5b1b13ca49332", []}}
+  "tentacat": {:git, "https://github.com/denispeplin/tentacat.git", "3a380ec1cb06ce0ee9fed285a7adcdee9cc7f1c4", []}}
