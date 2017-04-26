@@ -12,7 +12,7 @@ defmodule Rank.Application do
     children = [
       # Starts a worker by calling: Rank.Worker.start_link(arg1, arg2, arg3)
       # worker(Rank.Worker, [arg1, arg2, arg3]),
-      worker(Redix, [[], [name: :redix]])
+      worker(Redix, [[database: 7], [name: :redix]])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
