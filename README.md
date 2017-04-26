@@ -15,10 +15,10 @@ Hierarcy:
 To run code manually:
 
 ```elixir
-Rank.Github.get_readme("h4cc", "awesome-elixir")
+md = Rank.Github.get_readme("h4cc", "awesome-elixir")
 |> Rank.Parsers.Custom.Elixir.parse
-|> Enum.filter(fn({type, _}) -> type == :link end)
-|> Enum.each(fn({_, {_, link, _}}) -> IO.puts("#{DateTime.utc_now}, #{link}"); Rank.Github.get_stargazers_count(link); end)
+|> Rank.Builder.build
+File.write "result.md", md
 ```
 
 ## TODO
