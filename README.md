@@ -26,3 +26,4 @@ File.write "result.md", md
 - Generate Awesome List again, now with stargazers count, sort by them
 - First release (?)
 - Add other activity marks, "recent activity" for example.
+- Top 10 (or 20, or 50, or maybe even 100) packages for entire list.

@@ -30,7 +30,12 @@ defmodule Rank.Builder do
   defp to_markdown({:description, description}) do
     "*#{description}*\n"
   end
-  defp to_markdown({:link, {name, url, description, _stargazers}}) do
-    "* [#{name}](#{url}) - #{description}"
+  defp to_markdown({:link, {name, url, description, stargazers}}) do
+    "* [#{name}](#{url})#{stars_to_s(stargazers)} - #{description}"
+  end
+
+  defp stars_to_s(nil), do: ""
+  defp stars_to_s(stargazers) do
+    " (#{stargazers})"
   end
 end
