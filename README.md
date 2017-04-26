@@ -22,7 +22,6 @@ File.write "result.md", md
 ```
 
 ## TODO
-- Generate Awesome List again, now with stargazers count
 - Add parsers for Ruby, Golang, Rust, Javascript.
 - Generate Meta page for existing parsers.
 - Put everything on Github Pages, commit after each build (use schedule and API).

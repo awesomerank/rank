@@ -21,8 +21,8 @@ defmodule Rank.Builder do
   end
   defp add_stargazers({_category, _} = item), do: item
 
-  defp to_markdown({:contents, _category}) do
-    ""
+  defp to_markdown({:contents, {category, link}}) do
+    "- [#{category}]#{link}"
   end
   defp to_markdown({:category, name}) do
     "\n## #{name}"

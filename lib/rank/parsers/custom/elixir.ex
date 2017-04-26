@@ -14,7 +14,7 @@ defmodule Rank.Parsers.Custom.Elixir do
       is_nil(result) ->
         parse(tail, state, categories)
       state == :contents ->
-        parse(tail, state, [result | categories])
+        [{state, result} | parse(tail, state, [result | categories])]
       result ->
         [{state, result} | parse(tail, state, categories)]
     end
@@ -31,8 +31,8 @@ defmodule Rank.Parsers.Custom.Elixir do
   end
   # `- [Platforms](#platforms)`
   defp parse_line(:contents = state, <<"    - [", category::binary>>) do
-    [category_name, _link] = String.split(category, "]", parts: 2)
-    {state, category_name}
+    [category_name, link] = String.split(category, "]", parts: 2)
+    {state, {category_name, link}}
   end
   defp parse_line(state, "") do
     {state, nil}
