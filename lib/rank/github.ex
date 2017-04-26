@@ -14,15 +14,23 @@ defmodule Rank.Github do
   end
 
   def get_stargazers_count(<<"https://github.com/", path::binary>>) do
-    %{"stargazers_count" => stargazers} = Cache.get(path) || get_repo_info(path)
-    stargazers
+    (Cache.get!(path) || get_repo_info!(path))
+    |> parse_stargazers
+  end
+  def get_stargazers_count(_), do: nil
+
+  # TODO: tests for cases "repo/owner", "repo/owner/"
+  defp get_repo_info!(path) do
+    [_path, owner, repo] = Regex.run(~r/^([^\/]+)\/([^\/]+)/, path)
+    info = Tentacat.Repositories.repo_get(owner, repo, client())
+    :timer.sleep(1000) # TODO: make smarter expiration based on time spent in request
+    Cache.put!(path, info)
   end
 
-  defp get_repo_info(path) do
-    [owner, repo] = String.split(path, "/")
-    info = Tentacat.Repositories.repo_get(owner, repo, client())
-    Cache.put(path, info)
+  defp parse_stargazers(%{"stargazers_count" => stargazers}) do
+    stargazers
   end
+  defp parse_stargazers(_), do: nil
 
   def client do
     if token = System.get_env("AW_TOKEN") do

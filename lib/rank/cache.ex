@@ -5,16 +5,22 @@ defmodule Rank.Cache do
 
   @ttl 60 * 60 * 24 * 7
 
-  def get(key) do
+  def get!(key) do
     Redix.command!(:redix, ["GET", key])
     |> decode
   end
 
   defp decode(nil), do: nil
-  defp decode(data), do: Poison.decode!(data)
+  defp decode(data) do
+    case Poison.decode(data) do
+      {:ok, result} ->
+        result
+      {:error, _} ->
+        data
+    end
+  end
 
-  def put(key, map) do
-    data = Poison.encode!(map)
+  def put!(key, data) when is_binary(data) do
     commands = [
       ["MULTI"],
       ["SET", key, data],
@@ -22,6 +28,12 @@ defmodule Rank.Cache do
       ["EXEC"]
     ]
     {:ok, _} = Redix.pipeline(:redix, commands)
-    map
+    data
+  end
+  def put!(key, data) when is_map(data) do
+    put!(key, Poison.encode!(data))
+  end
+  def put!(key, data) when is_tuple(data) do
+    put!(key, inspect(data))
   end
 end
