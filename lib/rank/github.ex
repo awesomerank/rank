@@ -4,6 +4,7 @@ defmodule Rank.Github do
   """
 
   require Logger
+  alias Rank.Cache
 
   def get_readme(owner, repo) do
     Tentacat.Contents.readme(owner, repo, client())
@@ -13,9 +14,14 @@ defmodule Rank.Github do
   end
 
   def get_stargazers_count(<<"https://github.com/", path::binary>>) do
-    [owner, repo] = String.split(path, "/")
-    %{"stargazers_count" => stargazers} = Tentacat.Repositories.repo_get(owner, repo, client())
+    %{"stargazers_count" => stargazers} = Cache.get(path) || get_repo_info(path)
     stargazers
+  end
+
+  defp get_repo_info(path) do
+    [owner, repo] = String.split(path, "/")
+    info = Tentacat.Repositories.repo_get(owner, repo, client())
+    Cache.put(path, info)
   end
 
   def client do
