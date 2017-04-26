@@ -27,13 +27,15 @@ defmodule Rank.Cache do
       ["EXPIRE", key, @ttl],
       ["EXEC"]
     ]
-    {:ok, _} = Redix.pipeline(:redix, commands)
-    data
+    {:ok, _} = Redix.pipeline(:redix, commands) # TODO: check EXPIRE set
   end
   def put!(key, data) when is_map(data) do
     put!(key, Poison.encode!(data))
+    data
   end
   def put!(key, data) when is_tuple(data) do
-    put!(key, inspect(data))
+    string = inspect(data)
+    put!(key, string)
+    string
   end
 end
