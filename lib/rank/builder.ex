@@ -15,7 +15,7 @@ defmodule Rank.Builder do
     |> Enum.join("\n")
   end
 
-  defp add_stargazers({:link, {_name, url, _description} = link_data}) do
+  defp add_stargazers({state, {_name, url, _description} = link_data}) when state in [:link, :sublink] do
     stargasers = Rank.Github.get_stargazers_count(url)
     {:link, Tuple.append(link_data, stargasers)}
   end
@@ -32,6 +32,12 @@ defmodule Rank.Builder do
   end
   defp to_markdown({:link, {name, url, description, stargazers}}) do
     "* [#{name}](#{url})#{stars_to_s(stargazers)} - #{description}"
+  end
+  defp to_markdown({:link_subcategory, name}) do
+    "* #{name}"
+  end
+  defp to_markdown({:sublink, link}) do
+    "  #{to_markdown({:link, link})}"
   end
 
   defp stars_to_s(nil), do: ""

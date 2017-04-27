@@ -14,14 +14,31 @@ defmodule Rank.Github do
   end
 
   def get_stargazers_count(<<"https://github.com/", path::binary>>) do
-    (Cache.get!(path) || get_repo_info!(path))
-    |> parse_stargazers
+    if path |> parse_path |> check_path do
+      path
+      |> get_cached_path
+      |> parse_stargazers
+    else
+      nil
+    end
   end
   def get_stargazers_count(_), do: nil
 
+  defp get_cached_path(nil), do: nil
+  defp get_cached_path(path) do
+    Cache.get!(path) || get_repo_info!(path)
+  end
+
+  defp parse_path(path) do
+    Regex.run(~r/^([^\/]+)\/([^\/]+)/, path)
+  end
+
+  defp check_path([_path, _owner, _repo]), do: true
+  defp check_path(_), do: false
+
   # TODO: tests for cases "repo/owner", "repo/owner/"
   defp get_repo_info!(path) do
-    [_path, owner, repo] = Regex.run(~r/^([^\/]+)\/([^\/]+)/, path)
+    [_path, owner, repo] = parse_path(path)
     info = Tentacat.Repositories.repo_get(owner, repo, client())
     :timer.sleep(1000) # TODO: make smarter expiration based on time spent in request
     Cache.put!(path, info)

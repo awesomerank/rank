@@ -23,6 +23,7 @@ File.write "result.md", md
 
 ## TODO
 - Add parsers for Ruby, Golang, Rust, Javascript.
+- Review current limitations. Think of better way to parse pages.
 - Generate Meta page for existing parsers.
 - Put everything on Github Pages, commit after each build (use schedule and API).
 - Add tests.
