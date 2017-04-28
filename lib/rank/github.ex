@@ -16,16 +16,24 @@ defmodule Rank.Github do
   end
 
   defp embed_stargasers(line) do
-    Regex.run(~r/(.*)\[(.*)\]\(https:\/\/github.com\/([^\/]+)\/([^\/]+)\/?\)(.*)/, line)
+    line
+    |> run_regex
     |> embed_stargazer
+  end
+
+  def run_regex(line) do
+    if result = Regex.run(~r/(.*)\[(.*)\]\(https:\/\/github.com\/([^\/]+)\/([^\/]+)\/?\)(.*)/, line) do
+      result
+    else
+      line
+    end
   end
 
   defp embed_stargazer([_line, prefix, name, owner, repo, description]) do
     stargasers = get_stargazers_count(owner, repo)
     "#{prefix}[#{name}](https://github.com/#{owner}/#{repo})#{stars_to_s(stargasers)}#{description}"
   end
-  defp embed_stargazer([line | _tail]), do: line
-  defp embed_stargazer(nil), do: nil
+  defp embed_stargazer(line), do: line
 
   defp stars_to_s(nil), do: ""
   defp stars_to_s(stargazers) do
