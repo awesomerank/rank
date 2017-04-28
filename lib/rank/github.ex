@@ -6,42 +6,50 @@ defmodule Rank.Github do
   require Logger
   alias Rank.Cache
 
-  def get_readme(owner, repo) do
+  def parse_readme(owner, repo) do
     Tentacat.Contents.readme(owner, repo, client())
     |> Map.get("content")
     |> :base64.decode
     |> String.split("\n")
+    |> Enum.map(&embed_stargasers/1)
+    |> Enum.join("\n")
   end
 
-  def get_stargazers_count(<<"https://github.com/", path::binary>>) do
-    if path |> parse_path |> check_path do
-      path
-      |> get_cached_path
-      |> parse_stargazers
-    else
-      nil
-    end
-  end
-  def get_stargazers_count(_), do: nil
-
-  defp get_cached_path(nil), do: nil
-  defp get_cached_path(path) do
-    Cache.get!(path) || get_repo_info!(path)
+  defp embed_stargasers(line) do
+    Regex.run(~r/(.*)\[(.*)\]\(https:\/\/github.com\/([^\/]+)\/([^\/]+)\/?\)(.*)/, line)
+    |> embed_stargazer
   end
 
-  defp parse_path(path) do
-    Regex.run(~r/^([^\/]+)\/([^\/]+)/, path)
+  defp embed_stargazer([_line, prefix, name, owner, repo, description]) do
+    stargasers = get_stargazers_count(owner, repo)
+    "#{prefix}[#{name}](https://github.com/#{owner}/#{repo})#{stars_to_s(stargasers)}#{description}"
+  end
+  defp embed_stargazer([line | _tail]), do: line
+  defp embed_stargazer(nil), do: nil
+
+  defp stars_to_s(nil), do: ""
+  defp stars_to_s(stargazers) do
+    " (#{stargazers})"
   end
 
-  defp check_path([_path, _owner, _repo]), do: true
-  defp check_path(_), do: false
+  def get_stargazers_count(owner, repo) do
+    get_cached_path(owner, repo)
+    |> parse_stargazers
+  end
 
-  # TODO: tests for cases "repo/owner", "repo/owner/"
-  defp get_repo_info!(path) do
-    [_path, owner, repo] = parse_path(path)
+  defp get_cached_path(owner, repo) do
+    Cache.get!(path(owner, repo)) || get_repo_info!(owner, repo)
+  end
+
+  defp path(owner, repo) do
+    Enum.join([owner, repo], "/")
+  end
+
+  defp get_repo_info!(owner, repo) do
+    Logger.debug("Getting repo info for #{path(owner, repo)}")
     info = Tentacat.Repositories.repo_get(owner, repo, client())
     :timer.sleep(1000) # TODO: make smarter expiration based on time spent in request
-    Cache.put!(path, info)
+    Cache.put!(path(owner, repo), info)
   end
 
   defp parse_stargazers(%{"stargazers_count" => stargazers}) do

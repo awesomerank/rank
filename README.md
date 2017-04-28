@@ -15,16 +15,12 @@ Hierarcy:
 To run code manually:
 
 ```elixir
-md = Rank.Github.get_readme("h4cc", "awesome-elixir")
-|> Rank.Parsers.Custom.Elixir.parse
-|> Rank.Builder.build
+md = Rank.Github.parse_readme("h4cc", "awesome-elixir")
 File.write "result.md", md
 ```
 
 ## TODO
-- Add parsers for Ruby, Golang, Rust, Javascript.
-- Review current limitations. Think of better way to parse pages.
-- Generate Meta page for existing parsers.
+- Construct Meta parser, run individual parsers from it. Save Markdown for each page.
 - Put everything on Github Pages, commit after each build (use schedule and API).
 - Add tests.
 - Add instructions for writting new parsers, including test template

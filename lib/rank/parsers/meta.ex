@@ -12,7 +12,6 @@ defmodule Rank.Parsers.Meta do
   Parse Awesome Meta
   """
   def parse do
-    Github.get_readme(@owner, @repo)
-    |> Rank.Parsers.Page.parse
+    Github.parse_readme(@owner, @repo)
   end
 end
