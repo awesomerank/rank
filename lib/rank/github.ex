@@ -7,6 +7,11 @@ defmodule Rank.Github do
   import Rank.Parsers.Meta, only: [is_meta?: 2]
   alias Rank.Cache
 
+  # Lists that contain other lists locally. Can't save them, only link
+  @skip_save [
+    "dypsilon/frontend-dev-bookmarks"
+  ]
+
   def parse_readme(owner, repo) do
     Tentacat.Contents.readme(owner, repo, client())
     |> Map.get("content")
@@ -38,12 +43,16 @@ defmodule Rank.Github do
 
   defp embed_stargazer([_line, prefix, name, owner, repo, description], is_meta) do
     stargasers = get_stargazers_count(owner, repo)
-    link = if is_meta do
-      Logger.debug("Parsing child list: #{name} (#{path(owner, repo)})#{description}")
-      contents = Rank.Github.parse_readme(owner, repo)
-      File.mkdir!(owner)
-      path = Enum.join([path(owner, repo), "md"], ".")
-      File.write!(path, contents)
+    if is_meta, do: Logger.debug("Parsing child list: #{name} (#{path(owner, repo)})#{description}")
+    link = if is_meta && can_save?(owner, repo) do
+      lists_dir = Path.join("lists", owner)
+      path = Enum.join([Path.join(lists_dir, repo), "md"], ".")
+      # TODO: check timestamp, overwrite if old. Must be same timestamp as in Cache @ttl
+      if !File.exists?(path) do
+        File.mkdir_p!(lists_dir)
+        contents = Rank.Github.parse_readme(owner, repo)
+        File.write!(path, contents)
+      end
       path
     else
       "https://github.com/#{owner}/#{repo}"
@@ -55,6 +64,10 @@ defmodule Rank.Github do
   defp stars_to_s(nil), do: ""
   defp stars_to_s(stargazers) do
     " (#{stargazers})"
+  end
+
+  def can_save?(owner, repo) do
+    !Enum.member?(@skip_save, path(owner, repo))
   end
 
   def get_stargazers_count(owner, repo) do
@@ -73,7 +86,7 @@ defmodule Rank.Github do
   defp get_repo_info!(owner, repo) do
     Logger.debug("Getting repo info for #{path(owner, repo)}")
     info = Tentacat.Repositories.repo_get(owner, repo, client())
-    :timer.sleep(1000) # TODO: make smarter expiration based on time spent in request
+    :timer.sleep(700) # TODO: make smarter expiration based on time spent in request
     Cache.put!(path(owner, repo), info)
   end
 

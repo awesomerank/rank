@@ -15,7 +15,7 @@ defmodule Rank.Parsers.Meta do
   def parse do
     Logger.debug("Parsing meta")
     contents = Github.parse_readme(@owner, @repo)
-    File.write("index.md", contents)
+    File.write("lists/index.md", contents)
   end
 
   def is_meta?(owner, repo) do

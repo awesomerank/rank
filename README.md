@@ -20,14 +20,14 @@ File.write "result.md", md
 ```
 
 ## TODO
-- Construct Meta parser, run individual parsers from it. Save Markdown for each page.
+- Use stream to save meta
 - Put everything on Github Pages, commit after each build (use schedule and API).
 - Add tests.
-- Add instructions for writting new parsers, including test template
-(output is standartized)
-- Put resulting site to its own domain (probably within github.io, but maybe own domain).
+- Put resulting site to its own domain (probably within github.io, but maybe .org domain).
 - Establish periodic builds (own computer or separate build server or Linode host).
 - First release (?)
+- Smart timeouts for Github API
+- Use timestamp to check if saved list is old and owerwrite it
 - Sort by stargazers.
 - Add other activity marks, "recent activity" for example.
 - Top 10 (or 20, or 50, or maybe even 100) packages for entire list.
