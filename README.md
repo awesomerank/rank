@@ -20,10 +20,11 @@ File.write "result.md", md
 ```
 
 ## TODO
-- Use stream to save meta
+- Attach header to generated awesome lists. Put origin into it.
+- Parse local links, make them remote (with sign?)
 - Put everything on Github Pages, commit after each build (use schedule and API).
 - Add tests.
-- Put resulting site to its own domain (probably within github.io, but maybe .org domain).
+- Put resulting site to its own domain probably within github.io.
 - Establish periodic builds (own computer or separate build server or Linode host).
 - First release (?)
 - Look closely at already starred repos (for example https://github.com/jondot/awesome-react-native) and way they starred (https://github.com/jondot/jill)
@@ -32,3 +33,5 @@ File.write "result.md", md
 - Sort by stargazers.
 - Add other activity marks, "recent activity" for example.
 - Top 10 (or 20, or 50, or maybe even 100) packages for entire list.
+- Subscribe to lists repositories changes
+- Use stream to save meta
