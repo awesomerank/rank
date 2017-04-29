@@ -26,6 +26,7 @@ File.write "result.md", md
 - Put resulting site to its own domain (probably within github.io, but maybe .org domain).
 - Establish periodic builds (own computer or separate build server or Linode host).
 - First release (?)
+- Look closely at already starred repos (for example https://github.com/jondot/awesome-react-native) and way they starred (https://github.com/jondot/jill)
 - Smart timeouts for Github API
 - Use timestamp to check if saved list is old and owerwrite it
 - Sort by stargazers.

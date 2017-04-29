@@ -34,7 +34,7 @@ defmodule Rank.Github do
   end
 
   def run_regex(line) do
-    if result = Regex.run(~r/(.*)\[(.*)\]\(https:\/\/github.com\/([^\/]+)\/([^\/]+)\/?\)(.*)/, line) do
+    if result = Regex.run(~r/(.*)\[([^★]+)\]\(https:\/\/github.com\/([^\/]+)\/([^\/]+)\/?\)(.*)/, line) do
       result
     else
       line
@@ -57,13 +57,13 @@ defmodule Rank.Github do
     else
       "https://github.com/#{owner}/#{repo}"
     end
-    "#{prefix}[#{name}](#{link})#{stars_to_s(stargasers)}#{description}"
+    "#{prefix}[#{name}#{stars_to_s(stargasers)}](#{link})#{description}"
   end
   defp embed_stargazer(line, _is_meta), do: line
 
   defp stars_to_s(nil), do: ""
   defp stars_to_s(stargazers) do
-    " (#{stargazers})"
+    " ★#{stargazers}"
   end
 
   def can_save?(owner, repo) do
