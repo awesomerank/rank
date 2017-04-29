@@ -18,13 +18,14 @@ defmodule Rank.Github do
     |> :base64.decode
     |> String.split("\n")
     |> log_count
-    |> Enum.map(fn(line) -> embed_stargasers(line, is_meta?(owner, repo)) end)
+    |> Enum.map(fn(line) -> embed_stargazers(line, is_meta?(owner, repo)) end)
     |> Enum.join("\n")
   end
 
-  defp embed_stargasers(line, is_meta) do
+  defp embed_stargazers(line, is_meta) do
     line
     |> run_regex
+    |> get_stargazers
     |> embed_stargazer(is_meta)
   end
 
@@ -41,8 +42,13 @@ defmodule Rank.Github do
     end
   end
 
-  defp embed_stargazer([_line, prefix, name, owner, repo, description], is_meta) do
-    stargasers = get_stargazers_count(owner, repo)
+  defp get_stargazers([_line, _prefix, _name, owner, repo, _description] = regex_results) do
+    stargazers = get_stargazers_count(owner, repo)
+    [stargazers | regex_results]
+  end
+  defp get_stargazers(line), do: line
+
+  defp embed_stargazer([stargazers, _line, prefix, name, owner, repo, description], is_meta) when not is_nil(stargazers) do
     if is_meta, do: Logger.debug("Parsing child list: #{name} (#{path(owner, repo)})#{description}")
     link = if is_meta && can_save?(owner, repo) do
       lists_dir = Path.join("lists", owner)
@@ -57,7 +63,7 @@ defmodule Rank.Github do
     else
       "https://github.com/#{owner}/#{repo}"
     end
-    "#{prefix}[#{name}#{stars_to_s(stargasers)}](#{link})#{description}"
+    "#{prefix}[#{name}#{stars_to_s(stargazers)}](#{link})#{description}"
   end
   defp embed_stargazer(line, _is_meta), do: line
 
