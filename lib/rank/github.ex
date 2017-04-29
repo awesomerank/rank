@@ -48,7 +48,8 @@ defmodule Rank.Github do
   end
   defp get_stargazers(line), do: line
 
-  defp embed_stargazer([stargazers, _line, prefix, name, owner, repo, description], is_meta) when not is_nil(stargazers) do
+  defp embed_stargazer([nil, line | _tail], _is_meta), do: line
+  defp embed_stargazer([stargazers, _line, prefix, name, owner, repo, description], is_meta) do
     if is_meta, do: Logger.debug("Parsing child list: #{name} (#{path(owner, repo)})#{description}")
     link = if is_meta && can_save?(owner, repo) do
       lists_dir = Path.join("lists", owner)
