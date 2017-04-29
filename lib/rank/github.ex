@@ -4,6 +4,7 @@ defmodule Rank.Github do
   """
 
   require Logger
+  import Rank.Parsers.Meta, only: [is_meta?: 2]
   alias Rank.Cache
 
   def parse_readme(owner, repo) do
@@ -11,14 +12,20 @@ defmodule Rank.Github do
     |> Map.get("content")
     |> :base64.decode
     |> String.split("\n")
-    |> Enum.map(&embed_stargasers/1)
+    |> log_count
+    |> Enum.map(fn(line) -> embed_stargasers(line, is_meta?(owner, repo)) end)
     |> Enum.join("\n")
   end
 
-  defp embed_stargasers(line) do
+  defp embed_stargasers(line, is_meta) do
     line
     |> run_regex
-    |> embed_stargazer
+    |> embed_stargazer(is_meta)
+  end
+
+  defp log_count(lines) do
+    Logger.debug("#{Enum.count(lines)} lines")
+    lines
   end
 
   def run_regex(line) do
@@ -29,11 +36,21 @@ defmodule Rank.Github do
     end
   end
 
-  defp embed_stargazer([_line, prefix, name, owner, repo, description]) do
+  defp embed_stargazer([_line, prefix, name, owner, repo, description], is_meta) do
     stargasers = get_stargazers_count(owner, repo)
-    "#{prefix}[#{name}](https://github.com/#{owner}/#{repo})#{stars_to_s(stargasers)}#{description}"
+    link = if is_meta do
+      Logger.debug("Parsing child list: #{name} (#{path(owner, repo)})#{description}")
+      contents = Rank.Github.parse_readme(owner, repo)
+      File.mkdir!(owner)
+      path = Enum.join([path(owner, repo), "md"], ".")
+      File.write!(path, contents)
+      path
+    else
+      "https://github.com/#{owner}/#{repo}"
+    end
+    "#{prefix}[#{name}](#{link})#{stars_to_s(stargasers)}#{description}"
   end
-  defp embed_stargazer(line), do: line
+  defp embed_stargazer(line, _is_meta), do: line
 
   defp stars_to_s(nil), do: ""
   defp stars_to_s(stargazers) do
@@ -50,7 +67,7 @@ defmodule Rank.Github do
   end
 
   defp path(owner, repo) do
-    Enum.join([owner, repo], "/")
+    Path.join(owner, repo)
   end
 
   defp get_repo_info!(owner, repo) do

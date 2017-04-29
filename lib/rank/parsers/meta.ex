@@ -3,6 +3,7 @@ defmodule Rank.Parsers.Meta do
   Parser for list of awesome lists
   """
 
+  require Logger
   alias Rank.Github
 
   @owner "sindresorhus"
@@ -12,6 +13,12 @@ defmodule Rank.Parsers.Meta do
   Parse Awesome Meta
   """
   def parse do
-    Github.parse_readme(@owner, @repo)
+    Logger.debug("Parsing meta")
+    contents = Github.parse_readme(@owner, @repo)
+    File.write("index.md", contents)
+  end
+
+  def is_meta?(owner, repo) do
+    owner == @owner && repo == @repo
   end
 end

@@ -3,7 +3,7 @@ defmodule Rank.Cache do
   Simple Redis cache
   """
 
-  @ttl 60 * 60 * 24 * 7
+  @ttl 60 * 60 * 24 * 30 # 30 days
 
   def get!(key) do
     Redix.command!(:redix, ["GET", key])
