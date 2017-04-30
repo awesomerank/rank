@@ -18,6 +18,10 @@ defmodule Rank.Parsers.Meta do
     File.write("lists/index.md", contents)
   end
 
+  def path do
+    Path.join(@owner, @repo)
+  end
+
   def is_meta?(owner, repo) do
     owner == @owner && repo == @repo
   end

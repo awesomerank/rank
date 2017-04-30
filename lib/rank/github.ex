@@ -4,11 +4,11 @@ defmodule Rank.Github do
   """
 
   require Logger
-  import Rank.Parsers.Meta, only: [is_meta?: 2]
+  alias Rank.Parsers.Meta
   alias Rank.Cache
 
-  # Lists that contain other lists locally. Can't save them, only link
   @skip_save [
+    Meta.path,
     "dypsilon/frontend-dev-bookmarks"
   ]
 
@@ -18,7 +18,7 @@ defmodule Rank.Github do
     |> :base64.decode
     |> String.split("\n")
     |> log_count
-    |> Enum.map(fn(line) -> embed_stargazers(line, is_meta?(owner, repo)) end)
+    |> Enum.map(fn(line) -> embed_stargazers(line, Meta.is_meta?(owner, repo)) end)
     |> Enum.join("\n")
   end
 
@@ -35,7 +35,7 @@ defmodule Rank.Github do
   end
 
   def run_regex(line) do
-    if result = Regex.run(~r/(.*)\[([^★]+)\]\(https:\/\/github.com\/([^\/]+)\/([^\/]+)\/?\)(.*)/, line) do
+    if result = Regex.run(~r/(.*)\[([^★]+)\]\(https:\/\/github.com\/([^\/\?]+)\/([^\/\?]+)\/?\)(.*)/, line) do
       result
     else
       line
