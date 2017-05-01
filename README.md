@@ -20,9 +20,12 @@ File.write "result.md", md
 ```
 
 ## TODO
+- Add "clock" icon cNy (icon, number, y) - number of years outdated.
+Note it in header and footer.
 - Attach header and footer to generated awesome lists. Put origin into it.
 - Establish periodic builds, commit after each build (use schedule and API).
 - Add tests.
+- Add "fork me on github" with link to builder.
 - Put builds to own computer or separate build server or Linode host.
 - First release (?)
 - Look closely at already starred repos (for example https://github.com/jondot/awesome-react-native) and way they starred (https://github.com/jondot/jill)
