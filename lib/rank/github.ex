@@ -8,8 +8,7 @@ defmodule Rank.Github do
   alias Rank.Cache
 
   @skip_save [
-    Meta.path,
-    "dypsilon/frontend-dev-bookmarks"
+    Meta.path
   ]
 
   def parse_readme(owner, repo) do
@@ -18,8 +17,37 @@ defmodule Rank.Github do
     |> :base64.decode
     |> String.split("\n")
     |> log_count
-    |> Enum.map(fn(line) -> embed_stargazers(line, Meta.is_meta?(owner, repo)) end)
+    |> Enum.map(fn(line) ->
+      line
+      |> embed_stargazers(Meta.is_meta?(owner, repo))
+      |> replace_html_locals(owner, repo)
+      |> replace_markdown_locals(owner, repo)
+    end)
     |> Enum.join("\n")
+  end
+
+  defp replace_html_locals(line, owner, repo) do
+    Regex.replace(~r/href="([^#:]+\.(?:md|jpg|png|html|txt))"/, line, fn _, link ->
+      "href=\"#{github_external_path(owner, repo)}/#{link}\""
+    end)
+  end
+
+  defp replace_markdown_locals(line, owner, repo) do
+    if !Meta.is_meta?(owner, repo) do
+      Regex.replace(~r/\(([^#:\(\)\.]+\.(?:md|jpg|png|html|txt))\)/, line, fn _, link ->
+        "(#{github_external_path(owner, repo)}/#{link})"
+      end)
+    else
+      line
+    end
+  end
+
+  defp github_path(owner, repo) do
+    "https://github.com/#{owner}/#{repo}"
+  end
+
+  defp github_external_path(owner, repo) do
+    Path.join([github_path(owner, repo), "blob", "master"])
   end
 
   defp embed_stargazers(line, is_meta) do
@@ -62,7 +90,7 @@ defmodule Rank.Github do
       end
       path
     else
-      "https://github.com/#{owner}/#{repo}"
+      github_path(owner, repo)
     end
     "#{prefix}[#{name}#{stars_to_s(stargazers)}](#{link})#{description}"
   end
