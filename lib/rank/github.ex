@@ -24,6 +24,20 @@ defmodule Rank.Github do
       |> replace_markdown_locals(owner, repo)
     end)
     |> Enum.join("\n")
+    |> attach_layout(owner, repo)
+  end
+
+  defp attach_layout(contents, owner, repo) do
+    template("header.md", owner, repo) <>
+      contents <>
+      template("tail.md", owner, repo)
+  end
+
+  defp template(filename, owner, repo) do
+    template = [:code.priv_dir(:rank), "static", "templates", filename]
+    |> Path.join
+    |> File.read!
+    Regex.replace(~r/\$origin/, template, github_path(owner, repo))
   end
 
   defp replace_html_locals(line, owner, repo) do
