@@ -24,9 +24,9 @@ File.write "result.md", md
 Note it in header and footer.
 - Establish periodic builds, commit after each build (use schedule and API).
 - Add tests.
+- Put builds to own computer or separate build server or Linode host.
 - Add "fork me on github" with link to builder.
 - Add Google analytics.
-- Put builds to own computer or separate build server or Linode host.
 - First release (?)
 - Look closely at already starred repos (for example https://github.com/jondot/awesome-react-native) and way they starred (https://github.com/jondot/jill)
 - Add external link icon to external links.
