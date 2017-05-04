@@ -20,8 +20,7 @@ File.write "result.md", md
 ```
 
 ## TODO
-- Add "clock" icon cNy (icon, number, y) - number of years outdated.
-Note it in header and footer.
+- Link to index from every page (breadcrumbs?).
 - Establish periodic builds, commit after each build (use schedule and API).
 - Add tests.
 - Put builds to own computer or separate build server or Linode host.
@@ -38,3 +37,4 @@ Note it in header and footer.
 - Subscribe to lists repositories changes
 - Use stream to save meta
 - Use templates from Phoenix to wrap contents.
+- Add description of stars and clocks to header and footer.
