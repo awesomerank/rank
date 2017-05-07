@@ -1,9 +1,12 @@
 defmodule Rank.Cache do
   @moduledoc """
   Simple Redis cache
+
+  Encodes and decodes maps
   """
 
   @ttl 60 * 60 * 24 * 30 # 30 days
+  def ttl, do: @ttl
 
   def get!(key) do
     Redix.command!(:redix, ["GET", key])

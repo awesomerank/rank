@@ -5,6 +5,8 @@ defmodule Rank.Application do
 
   use Application
 
+  @redis_database Application.get_env(:rank, :redis_database)
+
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
@@ -12,7 +14,7 @@ defmodule Rank.Application do
     children = [
       # Starts a worker by calling: Rank.Worker.start_link(arg1, arg2, arg3)
       # worker(Rank.Worker, [arg1, arg2, arg3]),
-      worker(Redix, [[database: 7], [name: :redix]])
+      worker(Redix, [[database: @redis_database], [name: :redix]])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
