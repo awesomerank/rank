@@ -38,3 +38,5 @@ File.write "result.md", md
 - Use stream to save meta
 - Use templates from Phoenix to wrap contents.
 - Add description of stars and clocks to header and footer.
+- Do not localize lists without links to github.
+- Drop icons from parsed lists (build passed, awesome link, etc.)
