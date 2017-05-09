@@ -14,8 +14,8 @@ defmodule Rank.Parsers.Meta do
   """
   def parse do
     Logger.debug("Parsing meta")
-    contents = Readme.parse(@owner, @repo)
-    File.write("lists/index.md", contents)
+    Readme.parse(@owner, @repo)
+    |> Rank.Store.write_index
   end
 
   def path do

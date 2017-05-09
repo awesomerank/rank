@@ -1,8 +1,10 @@
-defmodule Rank.GithubApi do
+defmodule Rank.GithubApi.Tentacat do
   require Logger
 
   def readme(owner, repo) do
     Tentacat.Contents.readme(owner, repo, client())
+    |> Map.get("content")
+    |> :base64.decode
   end
 
   def repo_get(owner, repo) do

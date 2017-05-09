@@ -6,12 +6,11 @@ defmodule Rank.Github do
 
   require Logger
   alias Rank.Cache
-  alias Rank.GithubApi
+
+  @github_api Application.get_env(:rank, :github_api)
 
   def get_readme(owner, repo) do
-    GithubApi.readme(owner, repo)
-    |> Map.get("content")
-    |> :base64.decode
+    @github_api.readme(owner, repo)
     |> String.split("\n")
   end
 
@@ -57,7 +56,7 @@ defmodule Rank.Github do
 
   defp get_repo_info!(owner, repo) do
     Logger.debug("Getting repo info for #{path(owner, repo)}")
-    info = GithubApi.repo_get(owner, repo)
+    info = @github_api.repo_get(owner, repo)
     :timer.sleep(700) # TODO: make smarter expiration based on time spent in request
     Cache.put!(path(owner, repo), info)
   end
