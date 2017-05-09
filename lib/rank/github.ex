@@ -6,10 +6,10 @@ defmodule Rank.Github do
 
   require Logger
   alias Rank.Cache
-  alias Rank.Github
+  alias Rank.GithubApi
 
   def get_readme(owner, repo) do
-    Tentacat.Contents.readme(owner, repo, client())
+    GithubApi.readme(owner, repo)
     |> Map.get("content")
     |> :base64.decode
     |> String.split("\n")
@@ -29,7 +29,7 @@ defmodule Rank.Github do
   end
   def get_data(line), do: line
 
-  def data_to_s(%Github{stargazers_count: stargazers, idle_years: idle_years}) do
+  def data_to_s(%__MODULE__{stargazers_count: stargazers, idle_years: idle_years}) do
     Enum.join([stargazers_to_s(stargazers), idle_years_to_s(idle_years)])
   end
 
@@ -57,27 +57,16 @@ defmodule Rank.Github do
 
   defp get_repo_info!(owner, repo) do
     Logger.debug("Getting repo info for #{path(owner, repo)}")
-    info = Tentacat.Repositories.repo_get(owner, repo, client())
+    info = GithubApi.repo_get(owner, repo)
     :timer.sleep(700) # TODO: make smarter expiration based on time spent in request
     Cache.put!(path(owner, repo), info)
   end
 
   defp parse_data(%{"stargazers_count" => stargazers_count, "pushed_at" => pushed_at}) do
-    %Github{
+    %__MODULE__{
       stargazers_count: stargazers_count,
       idle_years: Timex.diff(Timex.now, Timex.parse!(pushed_at, "{ISO:Extended:Z}"), :years)
     }
   end
   defp parse_data(_), do: nil
-
-  def client do
-    if token = System.get_env("AW_TOKEN") do
-      Tentacat.Client.new(%{
-        access_token: token
-      })
-    else
-      Logger.warn("Using unauthorized Github access. Export AW_TOKEN to raise limits.")
-      Tentacat.Client.new
-    end
-  end
 end
