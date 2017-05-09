@@ -4,7 +4,7 @@ defmodule Rank.Parsers.Meta do
   """
 
   require Logger
-  alias Rank.Github
+  alias Rank.Parsers.Readme
 
   @owner "sindresorhus"
   @repo "awesome"
@@ -14,7 +14,7 @@ defmodule Rank.Parsers.Meta do
   """
   def parse do
     Logger.debug("Parsing meta")
-    contents = Github.parse_readme(@owner, @repo)
+    contents = Readme.parse(@owner, @repo)
     File.write("lists/index.md", contents)
   end
 

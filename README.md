@@ -15,8 +15,7 @@ Hierarcy:
 To run code manually:
 
 ```elixir
-md = Rank.Github.parse_readme("h4cc", "awesome-elixir")
-File.write "result.md", md
+Rank.Parsers.Meta.parse
 ```
 
 ## TODO
