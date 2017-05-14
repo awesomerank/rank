@@ -44,12 +44,12 @@ Ranked awesome lists, all in one place
 
 ## Platforms
 
-- [Frontend Development ★21585](lists/dypsilon/frontend-dev-bookmarks.md)
-- [React Native ★12370](lists/jondot/awesome-react-native.md)
+- [Frontend Development ★21623](dypsilon/frontend-dev-bookmarks)
+- [React Native ★12484](jondot/awesome-react-native)
 
 ## Programming Languages
 
-- [Elixir ★6413](lists/h4cc/awesome-elixir.md)
+- [Elixir ★6428](h4cc/awesome-elixir)
 
 ## License
 

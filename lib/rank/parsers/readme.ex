@@ -1,6 +1,7 @@
 defmodule Rank.Parsers.Readme do
   require Logger
   alias Rank.Github
+  alias Rank.Store
   alias Rank.Parsers.Meta
   alias Rank.Parsers.Readme
 
@@ -63,16 +64,10 @@ defmodule Rank.Parsers.Readme do
   defp embed_github_data([github_data, _line, prefix, name, owner, repo, description], is_meta) do
     if is_meta, do: Logger.debug("Parsing child list: #{name} (#{Github.path(owner, repo)})#{description}")
     # we are parsing meta, but child is not meta (avoid infinite recursion when meta links itself)
-    link = if is_meta && !Meta.is_meta?(owner, repo) do
-      lists_dir = Path.join("lists", owner)
-      path = Enum.join([Path.join(lists_dir, repo), "md"], ".")
-      # TODO: check timestamp, overwrite if old. Must be same timestamp as in Cache @ttl
-      if !File.exists?(path) do
-        File.mkdir_p!(lists_dir)
-        contents = Readme.parse(owner, repo)
-        File.write!(path, contents)
-      end
-      path
+    # TODO: check timestamp, overwrite if old. Must be same timestamp as in Cache @ttl
+    link = if is_meta && !Meta.is_meta?(owner, repo) && !Store.readme_exists?(owner, repo) do
+      contents = Readme.parse(owner, repo)
+      Store.write_readme(owner, repo, contents)
     else
       Github.path(owner, repo)
     end

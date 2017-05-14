@@ -13,5 +13,15 @@ defmodule Rank.Integration do
     reference_index = File.read!("test/files/tmp/lists/index.md")
     output_index = File.read!("test/files/output/index.md")
     assert reference_index == output_index
+    [
+      "dypsilon/frontend-dev-bookmarks.md",
+      "h4cc/awesome-elixir.md",
+      "jondot/awesome-react-native.md"
+    ]
+    |> Enum.each(fn(readme) ->
+      reference_readme = File.read!("test/files/tmp/lists/#{readme}")
+      output_readme = File.read!("test/files/output/#{readme}")
+      assert reference_readme == output_readme
+    end)
   end
 end
