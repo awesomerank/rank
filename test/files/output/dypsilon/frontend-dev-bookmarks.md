@@ -5,7 +5,7 @@ Ranked awesome lists, all in one place
 	This list is a copy of <a href="dypsilon/frontend-dev-bookmarks">dypsilon/frontend-dev-bookmarks</a> with ranks
 </p>
 ---
-# Frontend Development [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg) ★58342](sindresorhus/awesome)
+# Frontend Development [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg) ★58821](sindresorhus/awesome)
 
 **Manually curated collection of resources for frontend web developers.**
 
