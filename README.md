@@ -21,7 +21,6 @@ Rank.Parsers.Meta.parse
 ## TODO
 - Link to index from every page (breadcrumbs?).
 - Establish periodic builds, commit after each build (use schedule and API).
-- Add tests.
 - Put builds to own computer or separate build server or Linode host.
 - Add "fork me on github" with link to builder.
 - Add Google analytics.
