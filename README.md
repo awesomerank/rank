@@ -14,8 +14,8 @@ Hierarcy:
 
 To run code manually:
 
-```elixir
-Rank.Parsers.Meta.parse
+```bash
+mix meta.parse
 ```
 
 ## TODO
