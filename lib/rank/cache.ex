@@ -6,7 +6,14 @@ defmodule Rank.Cache do
   """
 
   @ttl 60 * 60 * 24 * 30 # 30 days
-  def ttl, do: @ttl
+  @jitter 0.25
+
+  # random ttl to avoid all keys expiring at once
+  def ttl do
+    low_ttl = @ttl * (1 - @jitter) |> round
+    high_ttl = @ttl * (1 + @jitter) |> round
+    Enum.random(low_ttl..high_ttl)
+  end
 
   def get!(key) do
     Redix.command!(:redix, ["GET", key])
