@@ -7,6 +7,7 @@ There are [other sites with curated lists of elixir packages](#other-awesome-lis
 
 - [Awesome Elixir](#awesome-elixir)
     - [Actors](#actors)
+    - [Algorithms and Data structures](#algorithms-and-data-structures)
 - [Resources](#resources)
     - [Books](#books)
     - [Websites](#websites)
@@ -16,6 +17,11 @@ There are [other sites with curated lists of elixir packages](#other-awesome-lis
 *Libraries and tools for working with actors and such.*
 
 * [dflow](https://github.com/dalmatinerdb/dflow) - Pipelined flow processing engine.
+
+## Algorithms and Data structures
+*Libraries and implementations of algorithms and data structures.*
+
+* [memoize](https://github.com/os6sense/DefMemo) - A memoization macro (defmemo) for elixir using a genserver backing store.
 
 # Resources
 Various resources, such as books, websites and articles, for improving your Elixir development skills and knowledge.

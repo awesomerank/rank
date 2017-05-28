@@ -53,7 +53,7 @@ defmodule Rank.Parsers.Readme do
   end
 
   def run_regex(line) do
-    if result = Regex.run(~r/(.*)\[([^★]+)\]\(https:\/\/github.com\/([^\/\?]+)\/([^\/\?]+)\/?\)(.*)/, line) do
+    if result = Regex.run(~r/(.*)\[([^★]+)\]\(https:\/\/github.com\/([^\/\?]+)\/([^\/\?\)]+)\/?\)(.*)/, line) do
       result
     else
       line
