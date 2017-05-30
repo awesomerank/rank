@@ -65,7 +65,7 @@ defmodule Rank.Parsers.Readme do
     if is_meta, do: Logger.debug("Parsing child list: #{name} (#{Github.path(owner, repo)})#{description}")
     # we are parsing meta, but child is not meta (avoid infinite recursion when meta links itself)
     # TODO: check timestamp, overwrite if old. Must be same timestamp as in Cache @ttl
-    link = if is_meta && !Meta.is_meta?(owner, repo) && !Store.readme_exists?(owner, repo) do
+    link = if is_meta && !Meta.is_meta?(owner, repo) do
       contents = Readme.parse(owner, repo)
       Store.write_readme(owner, repo, contents)
     else

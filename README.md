@@ -18,10 +18,19 @@ To run code manually:
 mix meta.parse
 ```
 
+## Deploy
+
+Create user, generate ssh keys, and put it as deploy keys to
+`awesomerank.github.io` repository.
+
+Copy both `rank` and `awesomerank.github.io` into this user homedir and
+establish periodic builds with crontab.
+```
+00 12 * * * cd ~/rank && ./build_and_deploy.sh
+```
+
 ## TODO
 - Link to index from every page (breadcrumbs?).
-- Establish periodic builds, commit after each build (use schedule and API).
-- Put builds to own computer or separate build server or Linode host.
 - Add "fork me on github" with link to builder.
 - Add Google analytics.
 - First release (?)

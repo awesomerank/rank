@@ -8,11 +8,6 @@ defmodule Rank.Store do
     |> File.write!(contents)
   end
 
-  def readme_exists?(owner, repo) do
-    readme_path(owner, repo)
-    |> File.exists?
-  end
-
   def write_readme(owner, repo, contents) do
     path = readme_path(owner, repo)
     File.mkdir_p!(lists_dir(owner))
