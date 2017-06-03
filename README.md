@@ -26,7 +26,7 @@ Create user, generate ssh keys, and put it as deploy keys to
 Copy both `rank` and `awesomerank.github.io` into this user homedir and
 establish periodic builds with crontab.
 ```
-00 12 * * * cd ~/rank && ./build_and_deploy.sh
+00 12 * * * $HOME/rank/build_and_deploy.sh 2>&1
 ```
 
 ## TODO
