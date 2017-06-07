@@ -33,6 +33,7 @@
 
 - [Platforms](#platforms)
 - [Programming Languages](#programming-languages)
+- [Front-End Development](#front-end-development)
 
 
 ## Platforms
@@ -43,6 +44,10 @@
 ## Programming Languages
 
 - [Elixir](https://github.com/h4cc/awesome-elixir)
+
+## Front-End Development
+
+- [Ionic Framework 2](https://github.com/candelibas/awesome-ionic2)
 
 ## License
 

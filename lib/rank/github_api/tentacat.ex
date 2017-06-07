@@ -2,9 +2,18 @@ defmodule Rank.GithubApi.Tentacat do
   require Logger
 
   def readme(owner, repo) do
+    readme_get(owner, repo)
+    |> extract_readme
+  end
+
+  defp extract_readme(%{"content" => content}) do
+    :base64.decode(content)
+    |> String.split("\n")
+  end
+  defp extract_readme(_error), do: []
+
+  defp readme_get(owner, repo) do
     Tentacat.Contents.readme(owner, repo, client())
-    |> Map.get("content")
-    |> :base64.decode
   end
 
   def repo_get(owner, repo) do

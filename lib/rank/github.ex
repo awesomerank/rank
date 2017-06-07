@@ -11,7 +11,6 @@ defmodule Rank.Github do
 
   def get_readme(owner, repo) do
     @github_api.readme(owner, repo)
-    |> String.split("\n")
   end
 
   defp github_path(owner, repo) do

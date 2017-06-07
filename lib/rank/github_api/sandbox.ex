@@ -3,12 +3,36 @@ defmodule Rank.GithubApi.Sandbox do
 
   @readme_prefix "test/files/github/readme"
   @repo_prefix "test/files/github/repo"
+  @redirect_error {301, %{
+      "documentation_url" => "https://developer.github.com/v3/#http-redirects",
+      "message" => "Moved Permanently",
+      "url" => "https://api.github.com/repositories/53809858"
+    }
+  }
 
+  # exact copy from Rank.GithubApi.Tentacat
   def readme(owner, repo) do
-    File.read!(readme_path(owner, repo))
+    readme_get(owner, repo)
+    |> extract_readme
+  end
+
+  # exact copy from Rank.GithubApi.Tentacat
+  defp extract_readme(%{"content" => content}) do
+    :base64.decode(content)
+    |> String.split("\n")
+  end
+  defp extract_readme(_error), do: []
+
+  defp readme_get(owner, repo) do
+    %{
+      "content" => readme_path(owner, repo) |> File.read! |> :base64.encode
+    }
   end
 
   # use repo_get_record instead to get and record real Github repo data
+  def repo_get("candelibas", "awesome-ionic2") do
+    @redirect_error
+  end
   def repo_get(owner, repo) do
     @repo_prefix
     |> Path.join(owner)

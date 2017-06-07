@@ -40,6 +40,7 @@ Ranked awesome lists, all in one place
 
 - [Platforms](#platforms)
 - [Programming Languages](#programming-languages)
+- [Front-End Development](#front-end-development)
 
 
 ## Platforms
@@ -50,6 +51,10 @@ Ranked awesome lists, all in one place
 ## Programming Languages
 
 - [Elixir ★6470](test/files/tmp/lists/h4cc/awesome-elixir.md)
+
+## Front-End Development
+
+- [Ionic Framework 2](https://github.com/candelibas/awesome-ionic2)
 
 ## License
 
