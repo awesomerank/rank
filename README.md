@@ -20,8 +20,8 @@ establish periodic builds with crontab.
 ```
 
 ## TODO
+
 - Link to index from every page (breadcrumbs?).
-- Add Google analytics.
 - Look closely at already starred repos (for example https://github.com/jondot/awesome-react-native) and way they starred (https://github.com/jondot/jill)
 - Add external link icon to external links.
 - Smart timeouts for Github API
