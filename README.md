@@ -1,15 +1,5 @@
 # Rank
 
-## Data to handle
-
-Hierarcy:
-- Meta
-  - MetaCategory
-    - List (github only)
-      - Category
-        - Link (mostly github)
-          - SubLink (as above but one level deeper)
-
 ## Run
 
 To run code manually:
@@ -31,9 +21,7 @@ establish periodic builds with crontab.
 
 ## TODO
 - Link to index from every page (breadcrumbs?).
-- Add "fork me on github" with link to builder.
 - Add Google analytics.
-- First release (?)
 - Look closely at already starred repos (for example https://github.com/jondot/awesome-react-native) and way they starred (https://github.com/jondot/jill)
 - Add external link icon to external links.
 - Smart timeouts for Github API
