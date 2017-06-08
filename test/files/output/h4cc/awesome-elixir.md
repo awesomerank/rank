@@ -5,8 +5,8 @@ Ranked awesome lists, all in one place
 	This list is a copy of <a href="h4cc/awesome-elixir">h4cc/awesome-elixir</a> with ranks
 </p>
 ---
-# Awesome Elixir [![Build Status](https://api.travis-ci.org/h4cc/awesome-elixir.svg?branch=master)](https://travis-ci.org/h4cc/awesome-elixir) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg) ★58821](sindresorhus/awesome)
-A curated list of amazingly awesome Elixir libraries, resources, and shiny things inspired by [awesome-php ★15427](ziadoz/awesome-php).
+# Awesome Elixir [![Build Status](https://api.travis-ci.org/h4cc/awesome-elixir.svg?branch=master)](https://travis-ci.org/h4cc/awesome-elixir) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg) ★58821](https://github.com/sindresorhus/awesome)
+A curated list of amazingly awesome Elixir libraries, resources, and shiny things inspired by [awesome-php ★15427](https://github.com/ziadoz/awesome-php).
 
 If you think a package should be added, please add a :+1: (`:+1:`) at the according issue or create a new one.
 
@@ -23,12 +23,12 @@ There are [other sites with curated lists of elixir packages](#other-awesome-lis
 ## Actors
 *Libraries and tools for working with actors and such.*
 
-* [dflow ★8](dalmatinerdb/dflow) - Pipelined flow processing engine.
+* [dflow ★8](https://github.com/dalmatinerdb/dflow) - Pipelined flow processing engine.
 
 ## Algorithms and Data structures
 *Libraries and implementations of algorithms and data structures.*
 
-* [memoize ★25](os6sense/DefMemo) - A memoization macro (defmemo) for elixir using a genserver backing store.
+* [memoize ★25](https://github.com/os6sense/DefMemo) - A memoization macro (defmemo) for elixir using a genserver backing store.
 
 # Resources
 Various resources, such as books, websites and articles, for improving your Elixir development skills and knowledge.
@@ -49,3 +49,14 @@ Please see [CONTRIBUTING](https://github.com/h4cc/awesome-elixir/blob/master/.gi
 <p align="center">
 	This list is a copy of <a href="h4cc/awesome-elixir">h4cc/awesome-elixir</a> with ranks
 </p>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-100705027-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

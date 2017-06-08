@@ -21,11 +21,11 @@ establish periodic builds with crontab.
 
 ## TODO
 
+- Add Travis CI.
 - Link to index from every page (breadcrumbs?).
 - Look closely at already starred repos (for example https://github.com/jondot/awesome-react-native) and way they starred (https://github.com/jondot/jill)
 - Add external link icon to external links.
 - Smart timeouts for Github API
-- Use timestamp to check if saved list is old and owerwrite it
 - Sort by stargazers.
 - Add other activity marks, "recent activity" for example.
 - Top 10 (or 20, or 50, or maybe even 100) packages for entire list.

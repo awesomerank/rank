@@ -69,7 +69,7 @@ defmodule Rank.Parsers.Readme do
       contents = Readme.parse(owner, repo)
       Store.write_readme(owner, repo, contents)
     else
-      Github.path(owner, repo)
+      Github.url(owner, repo)
     end
     "#{prefix}[#{name}#{Github.data_to_s(github_data)}](#{link})#{description}"
   end

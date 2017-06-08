@@ -13,12 +13,12 @@ defmodule Rank.Github do
     @github_api.readme(owner, repo)
   end
 
-  defp github_path(owner, repo) do
+  def url(owner, repo) do
     "https://github.com/#{owner}/#{repo}"
   end
 
   def external_path(owner, repo) do
-    Path.join([github_path(owner, repo), "blob", "master"])
+    Path.join([url(owner, repo), "blob", "master"])
   end
 
   def get_data([_line, _prefix, _name, owner, repo, _description] = regex_results) do
