@@ -2,7 +2,7 @@
 Ranked awesome lists, all in one place
 </h1>
 <p align="center">
-	This list is a copy of <a href="h4cc/awesome-elixir">h4cc/awesome-elixir</a> with ranks
+	This list is a copy of <a href="http://github.com/h4cc/awesome-elixir">h4cc/awesome-elixir</a> with ranks
 </p>
 ---
 # Awesome Elixir [![Build Status](https://api.travis-ci.org/h4cc/awesome-elixir.svg?branch=master)](https://travis-ci.org/h4cc/awesome-elixir) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg) ★58821](https://github.com/sindresorhus/awesome)
@@ -47,7 +47,7 @@ Various resources, such as books, websites and articles, for improving your Elix
 Please see [CONTRIBUTING](https://github.com/h4cc/awesome-elixir/blob/master/.github/CONTRIBUTING.md) for details.
 ---
 <p align="center">
-	This list is a copy of <a href="h4cc/awesome-elixir">h4cc/awesome-elixir</a> with ranks
+	This list is a copy of <a href="http://github.com/h4cc/awesome-elixir">h4cc/awesome-elixir</a> with ranks
 </p>
 
 <script>

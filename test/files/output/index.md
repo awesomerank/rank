@@ -2,7 +2,7 @@
 Ranked awesome lists, all in one place
 </h1>
 <p align="center">
-	This list is a copy of <a href="sindresorhus/awesome">sindresorhus/awesome</a> with ranks
+	This list is a copy of <a href="http://github.com/sindresorhus/awesome">sindresorhus/awesome</a> with ranks
 </p>
 ---
 <h1 align="center">
@@ -63,7 +63,7 @@ Ranked awesome lists, all in one place
 To the extent possible under law, [Sindre Sorhus](http://sindresorhus.com) has waived all copyright and related or neighboring rights to this work.
 ---
 <p align="center">
-	This list is a copy of <a href="sindresorhus/awesome">sindresorhus/awesome</a> with ranks
+	This list is a copy of <a href="http://github.com/sindresorhus/awesome">sindresorhus/awesome</a> with ranks
 </p>
 
 <script>

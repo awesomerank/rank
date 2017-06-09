@@ -2,7 +2,7 @@
 Ranked awesome lists, all in one place
 </h1>
 <p align="center">
-	This list is a copy of <a href="jondot/awesome-react-native">jondot/awesome-react-native</a> with ranks
+	This list is a copy of <a href="http://github.com/jondot/awesome-react-native">jondot/awesome-react-native</a> with ranks
 </p>
 ---
 # Awesome React Native
@@ -74,7 +74,7 @@ Content published on the Web.
 - [React Native Styling Cheatsheet ★555](https://github.com/vhpoet/react-native-styling-cheat-sheet)
 ---
 <p align="center">
-	This list is a copy of <a href="jondot/awesome-react-native">jondot/awesome-react-native</a> with ranks
+	This list is a copy of <a href="http://github.com/jondot/awesome-react-native">jondot/awesome-react-native</a> with ranks
 </p>
 
 <script>
