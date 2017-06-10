@@ -1,0 +1,9 @@
+language: elixir
+elixir:
+  - 1.4.4
+otp_release:
+  - 19.3
+services:
+  - redis-server
+script:
+  - mix test
