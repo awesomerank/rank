@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/awesomerank/rank.svg?branch=master)](https://travis-ci.org/awesomerank/rank)
+
 # Rank
 
 ## Run
