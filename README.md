@@ -23,14 +23,18 @@ establish periodic builds with crontab.
 
 ## TODO
 
-- Add Travis CI.
-- Link to index from every page (breadcrumbs?).
-- Look closely at already starred repos (for example https://github.com/jondot/awesome-react-native) and way they starred (https://github.com/jondot/jill)
-- Add external link icon to external links.
-- Smart timeouts for Github API
-- Sort by stargazers.
-- Add other activity marks, "recent activity" for example.
+### Ideas
+
 - Top 10 (or 20, or 50, or maybe even 100) packages for entire list.
+- Sort by stargazers.
+
+### Improvements
+
+- Link to index from every page (breadcrumbs?).
+- Add external link icon to external links.
+- Look closely at already starred repos (for example https://github.com/jondot/awesome-react-native) and way they starred (https://github.com/jondot/jill)
+- Smart timeouts for Github API
+- Add other activity marks, "recent activity" for example.
 - Subscribe to lists repositories changes
 - Use stream to save meta
 - Use templates from Phoenix to wrap contents.
