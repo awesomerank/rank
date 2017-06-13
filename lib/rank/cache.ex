@@ -5,7 +5,7 @@ defmodule Rank.Cache do
   Encodes and decodes maps
   """
 
-  @ttl 60 * 60 * 24 * 30 # 30 days
+  @ttl 60 * 60 * 24 * 7 # 7 days
   @jitter 0.25
 
   # random ttl to avoid all keys expiring at once
