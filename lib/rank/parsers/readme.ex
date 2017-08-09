@@ -5,6 +5,10 @@ defmodule Rank.Parsers.Readme do
   alias Rank.Parsers.Meta
   alias Rank.Parsers.Readme
 
+  @skip [
+    "chasegiunta/awesome-craft" # contains `{% cache %}`, causes Jekyll build error
+  ]
+
   def parse(owner, repo) do
     Github.get_readme(owner, repo)
     |> log_count
@@ -65,15 +69,21 @@ defmodule Rank.Parsers.Readme do
     if is_meta, do: Logger.debug("Parsing child list: #{name} (#{Github.path(owner, repo)})#{description}")
     # we are parsing meta, but child is not meta (avoid infinite recursion when meta links itself)
     # TODO: check timestamp, overwrite if old. Must be same timestamp as in Cache @ttl
-    link = if is_meta && !Meta.is_meta?(owner, repo) do
+    link = if is_meta && !Meta.is_meta?(owner, repo) && !skip?(owner, repo) do
       contents = Readme.parse(owner, repo)
       Store.write_readme(owner, repo, contents)
+      :timer.sleep(1000)
     else
       Github.url(owner, repo)
     end
     "#{prefix}[#{name}#{Github.data_to_s(github_data)}](#{link})#{description}"
   end
   defp embed_github_data(line, _is_meta), do: line
+
+  def skip?(owner, repo) do
+    path = Path.join(owner, repo)
+    Enum.member?(@skip, path)
+  end
 
   defp template(filename, owner, repo) do
     template = [:code.priv_dir(:rank), "static", "templates", filename]
