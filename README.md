@@ -41,3 +41,4 @@ establish periodic builds with crontab.
 - Add description of stars and clocks to header and footer.
 - Do not localize lists without links to github.
 - Drop icons from parsed lists (build passed, awesome link, etc.)
+- Remove old lists (removed from meta or ignored).
