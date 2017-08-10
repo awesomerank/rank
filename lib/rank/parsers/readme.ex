@@ -70,9 +70,9 @@ defmodule Rank.Parsers.Readme do
     # we are parsing meta, but child is not meta (avoid infinite recursion when meta links itself)
     # TODO: check timestamp, overwrite if old. Must be same timestamp as in Cache @ttl
     link = if is_meta && !Meta.is_meta?(owner, repo) && !skip?(owner, repo) do
+      :timer.sleep(1000)
       contents = Readme.parse(owner, repo)
       Store.write_readme(owner, repo, contents)
-      :timer.sleep(1000)
     else
       Github.url(owner, repo)
     end
